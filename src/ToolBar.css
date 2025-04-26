@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+
+.ToolBar{
+    width: 100vw;
+    height: 40px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content:space-between;
+    background-color: #0F3986;
+}
+
+.toolbar-Button-logo{
+    display: flex;
+    justify-items: baseline;
+    align-items:center;
+    gap: 0.3rem;
+    background-color: #144A19;
+    width: 9rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 1px 2px #144A19;
+    cursor: pointer;
+    margin-right: 1.3rem;
+}
+
+.toolbar-Button-logo img {
+    width: 1.8rem;
+    margin-left: 0.7rem;
+}
+
+.toolbar-Button-logo h1 {
+    font-size: 1.3rem;
+    font-weight:bold;
+    font-style: italic;
+    color: white;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.toolbar-tabs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    gap: 0.4rem;
+    color: white;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    
+}
+
+.toolbar-tabs-notepad {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    gap: 10px;
+    background-color: #1E4D95;
+    width: 300px;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    
+}
+
+.toolbar-tabs-checkers {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    gap: 10px;
+    background-color: #0B3170;
+    width: 300px;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    height: 100%;
+} 
+
+
+.toolbar-tabs-checkers img, .toolbar-tabs-notepad img {
+   width: 20px;
+   height: 20px;
+   margin-left: 1rem;
+}
+
+.toolbar-Date{
+    right: 0;
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #01598E;
+    box-shadow: 1px 2px #01598E;
+    width: 11rem;
+    border: solid 2px #01598E;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+
+.toolbar-Date img {
+    width: 25px;
+   height: 25px;
+   margin-left: 1rem;
+   
+   
+}

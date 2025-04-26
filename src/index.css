@@ -1,7 +1,4 @@
 :root {
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -10,9 +7,30 @@
 
 body {
   margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url('/public/windows-xp-bliss-4k-lu-1920x1080.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.section-board {
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.section-board-window {
+  width: 700px;
+  padding-bottom: 2.5rem;
+  background-color: #E8E9D5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}

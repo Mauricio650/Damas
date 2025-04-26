@@ -23,20 +23,15 @@ export function Board () {
     n2: 'N2'
   }
 
-  
-  
   const [board,setBoard] = useState(arrayBoard)
 
   const [currentPosition,setCurrentPosition] = useState([0,0])
 
   const [turn,setTurn] = useState('N1')
 
-  const [wantPosition,setWantPosition] = useState([0,0])
-
   const [futurePositions, setFuturePositions] = useState([[0,0],[0,0],[],[]])
 
   const [valueFuture,setValueFuture] = useState('')
-
 
 
  async function movePiece ({currentP, futureP, valueFuturePosition, currentPlayer,kill = []}) {
@@ -44,13 +39,13 @@ export function Board () {
     newBoard[futureP[0]][futureP[1]] = await currentPlayer
     newBoard[currentP[0]][currentP[1]] = await valueFuturePosition
     
-    console.log(kill)
     if(kill.length !== 0) {
-      console.log('hola')
       newBoard[kill[0]][kill[1]] = 'EB'
     }
     setTurn(currentPlayer === 'N1' ? 'N2' : 'N1')
-    setBoard(newBoard)
+    
+    return setBoard(newBoard)
+    
   }
   
   
@@ -58,6 +53,8 @@ export function Board () {
 
   const handleClick = (e) =>{
     const player = e.target.dataset.player
+    
+    
     if(player === turn) {
     
 
@@ -99,51 +96,36 @@ export function Board () {
 
   }
     
-    
   }
 
     const wannaMove = (e) => {
       if(e.target.dataset.value === 'EB'){
         setValueFuture(e.target.dataset.value)
-      }
+      } 
       
       const wannaM = [Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)]
-     console.log(futurePositions)
+     
       if(turn === players.n1){
+
         if(isEqual(futurePositions[0],wannaM) ){
-          if(isEqual(wannaM,[Number(e.target.dataset.positionY) + 2,Number(e.target.dataset.positionX) - 2])){
-           
-            setWantPosition(wannaM)
-            return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[2]})
-          }
-          return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn, kill:futurePositions[2]})
+          return movePiece({currentP:currentPosition,futureP:wannaM,valueFuturePosition:valueFuture,currentPlayer:turn, kill:futurePositions[2]})
         }
 
         if(isEqual(futurePositions[1],wannaM) ){
-          if(isEqual(wannaM,[Number(e.target.dataset.positionY) + 2,Number(e.target.dataset.positionX) + 2])){
-            setWantPosition(wannaM)
-            return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[3]})
-          }
-          return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[3]})
+          return movePiece({currentP:currentPosition,futureP:wannaM,valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[3]})
         }
       }
 
 
       if(turn === players.n2){
+
         if(isEqual(futurePositions[0],wannaM) ){
-          if(isEqual(wannaM,[Number(e.target.dataset.positionY) - 2,Number(e.target.dataset.positionX) - 2])){
-            setWantPosition(wannaM)
-            return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[2]})
-          }
-          return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[2]})
+          return movePiece({currentP:currentPosition,futureP:wannaM,valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[2]})
         }
 
         if(isEqual(futurePositions[1],wannaM) ){
-          if(isEqual(wannaM,[Number(e.target.dataset.positionY) - 2,Number(e.target.dataset.positionX) + 2])){
-            setWantPosition(wannaM)
-            return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[3]})
-          }
-          return movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[3]})
+          return movePiece({currentP:currentPosition,futureP:wannaM,valueFuturePosition:valueFuture,currentPlayer:turn,kill:futurePositions[3]})
+
         }
       }
         
@@ -151,7 +133,8 @@ export function Board () {
     }
 
     
-    
+    console.log(turn)
+
 
   return (
     <>
@@ -160,6 +143,7 @@ export function Board () {
       {
         board.map((value, index)=>{
           return value.map((v,i) => {
+            const token = v === 'N1' ? 'token-black' : 'token-white'
             if(v === 'N1' || v === 'N2'){
             return <div data-position-y={index}
                         data-position-x={i}
@@ -167,7 +151,9 @@ export function Board () {
                         key={[index,i]}
                         onClick={handleClick}>
                     
-                      <div data-position-y={index}
+                      <div
+                        className={token}
+                       data-position-y={index}
                         data-position-x={i}
                         data-player={v}>
                           {v}
@@ -180,13 +166,15 @@ export function Board () {
                           data-position-x={i} 
                           className='Board-SquareBoard-WHITE'
                           key={[index,i]}
-                          onClick={wannaMove}
-                          >
+                          onClick={wannaMove}>
                             
-                        <div data-position-y={index}
+                        <div
+                        data-position-y={index}
                         data-position-x={i}
-                        data-value={v}>{v}</div>
-                     </div>
+                        data-value={v}>{v}
+                        </div>
+
+                      </div>
             }else{
               return <div data-position-y={index}
                           data-position-x={i} 
@@ -198,7 +186,9 @@ export function Board () {
 
                         <div data-position-y={index}
                         data-position-x={i}
-                        data-value={v}>{v}</div>
+                        data-value={v}>
+                        </div>
+
                      </div>
             }
           })
