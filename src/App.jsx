@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { isEqual, set } from 'lodash'
+import { isEqual} from 'lodash'
 import './App.css'
 
 
@@ -16,6 +16,7 @@ export function Board () {
     ['N2','EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW'],
     ['EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW', 'N2'],
   ]
+
 
   const players = {
     n1:'N1',
@@ -36,6 +37,8 @@ export function Board () {
 
   const [valueFuture,setValueFuture] = useState('')
 
+
+
  async function movePiece ({currentP, futureP, valueFuturePosition, currentPlayer}) {
     const newBoard = [...board]
     newBoard[futureP[0]][futureP[1]] = await currentPlayer
@@ -43,6 +46,9 @@ export function Board () {
     setTurn(currentPlayer === 'N1' ? 'N2' : 'N1')
     setBoard(newBoard)
   }
+  
+  
+
 
   const handleClick = (e) =>{
     const player = e.target.dataset.player
@@ -55,10 +61,27 @@ export function Board () {
 
     if(turn === players.n1) {
       const fPositions = [[Number(e.target.dataset.positionY) + 1,Number(e.target.dataset.positionX) -1],[Number(e.target.dataset.positionY) + 1,Number(e.target.dataset.positionX) + 1]]
+      
+      if(board[Number(e.target.dataset.positionY) + 1][Number(e.target.dataset.positionX) -1] === players.n2){
+        fPositions[0] = [Number(e.target.dataset.positionY) + 2,Number(e.target.dataset.positionX) - 2]
+      }
+
+      if(board[Number(e.target.dataset.positionY) + 1][Number(e.target.dataset.positionX) + 1] === players.n2) {
+        fPositions[1] = [Number(e.target.dataset.positionY) + 2,Number(e.target.dataset.positionX) + 2]
+      }
       setFuturePositions(fPositions)
       console.log(`sus futuras pociciones pueden ser ${futurePositions}`)
     }else {
       const fPositions = [[Number(e.target.dataset.positionY) - 1,Number(e.target.dataset.positionX) -1],[Number(e.target.dataset.positionY) - 1,Number(e.target.dataset.positionX) + 1]]
+      
+      if(board[Number(e.target.dataset.positionY) - 1][Number(e.target.dataset.positionX) - 1] === players.n1){
+        fPositions[0] = [Number(e.target.dataset.positionY) - 2,Number(e.target.dataset.positionX) - 2]
+      }
+
+      if(board[Number(e.target.dataset.positionY) - 1][Number(e.target.dataset.positionX) + 1] === players.n1) {
+        fPositions[1] = [Number(e.target.dataset.positionY) - 2,Number(e.target.dataset.positionX) + 2]
+      }
+      
       setFuturePositions(fPositions)
       console.log(`sus futuras pociciones pueden ser ${futurePositions}`)
       
@@ -70,10 +93,13 @@ export function Board () {
   }
 
     const wannaMove = (e) => {
+      if(e.target.dataset.value === 'EB'){
+        setValueFuture(e.target.dataset.value)
+      }
+      
       const wannaM = [Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)]
       if (isEqual(futurePositions[0],wannaM) || isEqual(futurePositions[1],wannaM)){
         setWantPosition(wannaM)
-        setValueFuture(e.target.dataset.value) 
         console.log('el jugador decide mover hacia', wantPosition)
         movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn})
       }
@@ -83,16 +109,8 @@ export function Board () {
     
     
 
-
-    
-
-
   return (
     <>
-    {/* <article className='Board-Table-Positions'>
-      <div className='Board-table-Positions-BLACK'>B</div>
-      <div className='Board-table-Positions-WHITE'>W</div>
-    </article> */}
 
     <article className='Board'>
       {
