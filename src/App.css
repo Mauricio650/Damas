@@ -14,8 +14,11 @@
     color: #fff;
     text-align: center;
     line-height: 4;
+    cursor: pointer;
 }
 
+
+   
 
 .Board-SquareBoard-WHITE{
     width: 100%;
@@ -45,7 +48,7 @@
     height: 100px;
     text-align: center;
     line-height: 6;
-    background: black;
+    background: chocolate;
     color: white;
     border-radius: 50%;
     border: solid 2px white;
@@ -56,8 +59,9 @@
     height: 100px;
     text-align: center;
     line-height: 6;
-    background: white;
-    color: #000;
+    background: chocolate;
+    color: white;
     border-radius: 50%;
-    border: solid 2px black;
+    border: solid 2px white;
 }
+

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { isEqual } from 'lodash'
+import { isEqual, set } from 'lodash'
 import './App.css'
 
 
@@ -21,60 +21,82 @@ export function Board () {
     n1:'N1',
     n2: 'N2'
   }
+
+  
   
   const [board,setBoard] = useState(arrayBoard)
 
   const [currentPosition,setCurrentPosition] = useState([0,0])
 
-  const [turn,setTurn] = useState('')
+  const [turn,setTurn] = useState('N1')
 
   const [wantPosition,setWantPosition] = useState([0,0])
 
   const [futurePositions, setFuturePositions] = useState([[0,0],[0,0]])
 
+  const [valueFuture,setValueFuture] = useState('')
+
+ async function movePiece ({currentP, futureP, valueFuturePosition, currentPlayer}) {
+    const newBoard = [...board]
+    newBoard[futureP[0]][futureP[1]] = await currentPlayer
+    newBoard[currentP[0]][currentP[1]] = await valueFuturePosition
+    setTurn(currentPlayer === 'N1' ? 'N2' : 'N1')
+    setBoard(newBoard)
+  }
+
   const handleClick = (e) =>{
     const player = e.target.dataset.player
+    if(player === turn) {
+    console.log('turno del player',turn)
 
     const currentP = [Number(e.target.dataset.positionY),Number(e.target.dataset.positionX)]
     setCurrentPosition(currentP)
-    console.log('esta en la posicion',currentP)
+    console.log(`esta en la posicion ${currentP}`)
 
-    if(player === 'N1') {
+    if(turn === players.n1) {
       const fPositions = [[Number(e.target.dataset.positionY) + 1,Number(e.target.dataset.positionX) -1],[Number(e.target.dataset.positionY) + 1,Number(e.target.dataset.positionX) + 1]]
       setFuturePositions(fPositions)
-      console.log('se puede mover hacia las posiciones',fPositions)
+      console.log(`sus futuras pociciones pueden ser ${futurePositions}`)
     }else {
       const fPositions = [[Number(e.target.dataset.positionY) - 1,Number(e.target.dataset.positionX) -1],[Number(e.target.dataset.positionY) - 1,Number(e.target.dataset.positionX) + 1]]
       setFuturePositions(fPositions)
-      console.log('se puede mover hacia las posiciones',fPositions)
+      console.log(`sus futuras pociciones pueden ser ${futurePositions}`)
+      
     }
-  }
 
+  }
+    
+    
+  }
 
     const wannaMove = (e) => {
       const wannaM = [Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)]
-      const valueSquare = e.target.dataset.value
       if (isEqual(futurePositions[0],wannaM) || isEqual(futurePositions[1],wannaM)){
         setWantPosition(wannaM)
-        console.log(valueSquare)
-        console.log('DECIDE MOVER HACIA LA POSICION',wannaM)
+        setValueFuture(e.target.dataset.value) 
+        console.log('el jugador decide mover hacia', wantPosition)
+        movePiece({currentP:currentPosition,futureP:[Number(e.currentTarget.dataset.positionY),Number(e.currentTarget.dataset.positionX)],valueFuturePosition:valueFuture,currentPlayer:turn})
       }
       
     }
 
-  
+    
+    
+
+
+    
 
 
   return (
     <>
-    <article className='Board-Table-Positions'>
+    {/* <article className='Board-Table-Positions'>
       <div className='Board-table-Positions-BLACK'>B</div>
       <div className='Board-table-Positions-WHITE'>W</div>
-    </article>
+    </article> */}
 
     <article className='Board'>
       {
-        arrayBoard.map((value, index)=>{
+        board.map((value, index)=>{
           return value.map((v,i) => {
             if(v === 'N1' || v === 'N2'){
             return <div data-position-y={index}
