@@ -1,14 +1,19 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import './styles/index.css'
 import { Board } from './App'
-import { ToolBar } from './ToolBar'
+import { ToolBar } from './components/ToolBar'
+import { WindowsHeader } from './components/WindowsHeader'
+import { IconsDesktop } from './components/IconsDesktop'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <section className='icon-Desk'>
+    <IconsDesktop/>
+    </section>
     <section className='section-board'>
       <div className='section-board-window'>
-        <div>hola</div>
+        <WindowsHeader/>
         <Board />
       </div>
     </section>

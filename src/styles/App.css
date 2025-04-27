@@ -41,6 +41,7 @@
     height: 3rem;
     display: flex;
     justify-content: center;
+    cursor:grabbing;
     
 }
 
@@ -55,4 +56,19 @@
     background-color: cornsilk;
     color: transparent;
     box-shadow: rgba(2, 1, 2, 0.4) 0px 5px, rgba(10, 6, 9, 0.3) 0px 10px, rgba(36, 23, 31, 0.2) 0px 15px, rgba(201, 193, 193, 0.1) 0px 20px, rgba(16, 8, 13, 0.05) 0px 25px;
+}
+
+
+
+@media (max-width: 1280px) {
+    .Board{
+        width: 250px; 
+    }
+
+
+    .token-black, .token-white {
+        width: 1rem;
+        height: 1rem;     
+    }
+    
 }

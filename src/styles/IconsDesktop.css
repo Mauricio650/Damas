@@ -1,0 +1,31 @@
+.Icons-Desktop {
+    width: 100px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 3rem;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: small;
+}
+
+
+.Icons-Desktop-checker img, .Icons-Desktop-notepad img{
+    width: 3rem;
+}
+
+
+@media (max-width:540px){
+    .Icons-Desktop-checker img, .Icons-Desktop-notepad img{
+        width: 1rem;
+    }
+
+    .Icons-Desktop {
+        padding: 1rem;
+        gap: 2rem;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 10px;
+    }
+}

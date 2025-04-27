@@ -1,0 +1,78 @@
+.windows-Header {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   height: 30px;
+   background-color: #0055E9;
+}
+
+.windows-header-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 200px;
+    color: white;
+    
+}
+
+
+.windows-header-maxMinClose {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 0.5rem;
+    width: 200px;
+    margin-right: 1px;
+    
+}
+
+.windows-header-maxMinClose .min {
+    width: 20px;
+    height: 20px;
+    padding-right: 3px;
+    border: solid 2px white;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    cursor: pointer;
+}
+
+.min .in-min {
+    width: 13px;
+    height: 5px;
+    background-color: white;
+    margin-top: auto;
+    margin-bottom: 2px;
+}
+
+.windows-header-maxMinClose .max {
+    width: 20px;
+    height: 20px;
+    border: solid 2px white;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    cursor: pointer;
+}
+
+.max .in-max {
+    width: 100%;
+    height: 5px;
+    background-color: white;
+    margin-bottom: auto;
+    margin-bottom: 2px;
+}
+
+
+.windows-header-maxMinClose .close {
+    width: 20px;
+    height: 20px;
+    background-color: #cb5527;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: solid 2px white;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    cursor: pointer;
+}

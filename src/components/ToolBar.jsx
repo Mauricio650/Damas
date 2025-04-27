@@ -1,6 +1,6 @@
 import {useState, useEffect } from 'react'
 
-import './ToolBar.css'
+import '../styles/ToolBar.css'
 
 
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { isEqual} from 'lodash'
-import './App.css'
+import './styles/App.css'
 
 
 
@@ -132,8 +132,6 @@ export function Board () {
       
     }
 
-    
-    console.log(turn)
 
 
   return (
