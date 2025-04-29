@@ -1,5 +1,8 @@
 import {useState, useEffect } from 'react'
-
+import logoWindows from '../assets/images/pngwing.com.png'
+import logoNotepad from '../assets/images/blockno.png'
+import logoBoard from '../assets/images/board.png'
+import logoMessenger from '../assets/images/messe.png'
 import '../styles/ToolBar.css'
 
 
@@ -34,23 +37,23 @@ export function ToolBar () {
         <header className='ToolBar'>
                 <div className='toolbar-Button-logo'>
                     
-                        <img src="/pngwing.com.png" alt="Logo of windows xp" />
+                        <img src={logoWindows} alt="Logo of windows xp" />
                         <h1>Start</h1>
                     
                 </div>
                 <div className='toolbar-tabs'>
                     <div className='toolbar-tabs-notepad'>   
-                        <img src="/blockno.png" alt="logo of Notepad" />
+                        <img src={logoNotepad} alt="logo of Notepad" />
                         <p>Untitled - Notepad</p>
                     </div>
                     <div className='toolbar-tabs-checkers'>   
-                        <img src="/board.png" alt="loo Board of checkers" />
+                        <img src={logoBoard} alt="loo Board of checkers" />
                         <p>Internet Checkers</p>
                     </div>
                 </div>
 
                 <div className='toolbar-Date'>
-                        <img src="/messe.png" alt="logo of messenger" />
+                        <img src={logoMessenger} alt="logo of messenger" />
                         <p>{currentDate}</p>
                 </div>
             </header>

@@ -1,4 +1,6 @@
 import '../styles/windowsHeader.css'
+import logoBoard from '../assets/images/board.png'
+
 
 
 
@@ -9,7 +11,7 @@ export function WindowsHeader (){
         <>
             <header className='windows-Header'>
             <div className='windows-header-info' >   
-                   <img src="/board.png" alt="loo Board of checkers" />
+                   <img src={logoBoard} alt="loo Board of checkers" />
                     <p>Internet Checkers</p>
                 </div>
                 <div className='windows-header-maxMinClose'>

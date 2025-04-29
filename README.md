@@ -87,7 +87,7 @@ yarn dev
 
 ```
 ├── src/
-│   ├── assets/         # Static assets
+│   ├── components/         # Static assets
 │   │   ├── IconsDesktop.jsx    # Desktop icons component
 │   │   ├── ToolBar.jsx         # Game toolbar component
 │   │   └── WindowsHeader.jsx   # Window header component
