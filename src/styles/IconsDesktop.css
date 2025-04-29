@@ -16,7 +16,7 @@
 }
 
 
-@media (max-width:540px){
+/* @media (max-width:540px){
     .Icons-Desktop-checker img, .Icons-Desktop-notepad img{
         width: 1rem;
     }
@@ -27,5 +27,22 @@
         color: white;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 10px;
+    }
+} */
+
+
+@media (max-width: 540px) {
+    .Icons-Desktop {
+        padding: 0.5rem;    /* Menos espacio en pantallas pequeñas */
+        gap: 1rem;          /* Disminuir separación entre iconos */
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 0.75rem; /* Más pequeño aún, usando rem */
+    }
+
+    .Icons-Desktop-checker img, 
+    .Icons-Desktop-notepad img {
+        width: 2rem;  /* Un poco más grande que 1rem, para que no se vea demasiado pequeño */
+        height: auto; /* Que conserve la proporción */
     }
 }

@@ -113,7 +113,7 @@
    
 }
 
-@media (max-width:1280px){
+/* @media (max-width:1280px){
     .toolbar-tabs-checkers, .toolbar-tabs-notepad {
         width: 170px;
         height: 100%;
@@ -155,4 +155,58 @@
          .toolbar-Date{
             left: 0;
          }
-}
+} */
+
+
+@media (max-width: 1280px) {
+    .toolbar-tabs-checkers,
+    .toolbar-tabs-notepad {
+      width: 170px;
+      height: 100%;
+      margin: 0 0.5rem;
+    }
+  }
+  
+  @media (max-width: 540px) {
+    /* Tabs (Notepad y Checkers) */
+    .toolbar-tabs-checkers,
+    .toolbar-tabs-notepad {
+      width: 100px;
+      height: 100%;
+      margin: 0 0.5rem;
+      font-size: 0.75rem;
+    }
+  
+    /* Logo botón inicio */
+    .toolbar-Button-logo {
+      width: 2rem;
+      margin-right: 0.2rem;
+      padding-right: 1rem;
+    }
+  
+    .toolbar-Button-logo h1 {
+      display: none; /* Oculta completamente el texto */
+    }
+  
+    .toolbar-Button-logo img {
+      width: 1.4rem;
+    }
+  
+    /* Fecha y hora */
+    .toolbar-Date {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      left: 0;
+    }
+  
+    .toolbar-Date img {
+      width: 1rem;
+      height: 1rem;
+    }
+  
+    .toolbar-Date p {
+      font-size: 0.75rem;
+    }
+  }
+  
