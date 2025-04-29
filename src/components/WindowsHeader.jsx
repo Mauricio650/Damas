@@ -9,7 +9,7 @@ export function WindowsHeader (){
         <>
             <header className='windows-Header'>
             <div className='windows-header-info' >   
-                   <img src="/public/board.png" alt="loo Board of checkers" />
+                   <img src="/board.png" alt="loo Board of checkers" />
                     <p>Internet Checkers</p>
                 </div>
                 <div className='windows-header-maxMinClose'>
