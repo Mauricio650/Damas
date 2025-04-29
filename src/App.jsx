@@ -4,52 +4,113 @@ import './styles/App.css'
 
 
 
+const arrayBoard = [
+  ['N1','EW', 'N1', 'EW', 'N1', 'EW', 'N1', 'EW'],
+  ['EW', 'N1', 'EW', 'N1', 'EW', 'N1', 'EW', 'N1'],
+  ['N1','EW', 'N1', 'EW', 'N1', 'EW', 'N1', 'EW'],
+  ['EW','EB', 'EW', 'EB', 'EW', 'EB', 'EW', 'EB'],
+  ['EB','EW', 'EB', 'EW', 'EB', 'EW', 'EB', 'EW'],
+  ['EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW', 'N2'],
+  ['N2','EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW'],
+  ['EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW', 'N2'],
+]
+
+
+const players = {
+  n1:'N1',
+  n2: 'N2'
+}
+
+
+
+
 export function Board () {
 
-  const arrayBoard = [
-    ['N1','EW', 'N1', 'EW', 'N1', 'EW', 'N1', 'EW'],
-    ['EW', 'N1', 'EW', 'N1', 'EW', 'N1', 'EW', 'N1'],
-    ['N1','EW', 'N1', 'EW', 'N1', 'EW', 'N1', 'EW'],
-    ['EW','EB', 'EW', 'EB', 'EW', 'EB', 'EW', 'EB'],
-    ['EB','EW', 'EB', 'EW', 'EB', 'EW', 'EB', 'EW'],
-    ['EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW', 'N2'],
-    ['N2','EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW'],
-    ['EW', 'N2', 'EW', 'N2', 'EW', 'N2', 'EW', 'N2'],
-  ]
+  
 
-
-  const players = {
-    n1:'N1',
-    n2: 'N2'
-  }
-
-  const [board,setBoard] = useState(arrayBoard)
+  const [board,setBoard] = useState(() => {
+    const boardStorage = window.localStorage.getItem('board')
+    return boardStorage ? JSON.parse(boardStorage) : arrayBoard
+  })
 
   const [currentPosition,setCurrentPosition] = useState([0,0])
 
-  const [turn,setTurn] = useState('N1')
+  const [turn,setTurn] = useState(() => {
+    const turnStorage = window.localStorage.getItem('turn')
+    return turnStorage ? JSON.parse(turnStorage) : 'N1'
+  })
 
   const [futurePositions, setFuturePositions] = useState([[0,0],[0,0],[],[]])
 
   const [valueFuture,setValueFuture] = useState('')
 
+  const [winner,setWinner] = useState(null)
 
- async function movePiece ({currentP, futureP, valueFuturePosition, currentPlayer,kill = []}) {
-    const newBoard = [...board]
-    newBoard[futureP[0]][futureP[1]] = await currentPlayer
-    newBoard[currentP[0]][currentP[1]] = await valueFuturePosition
+  const [killsN1,setKillsN1] = useState(0)
+
+  const [killsN2,setKillsN2] = useState(0)
+
+
+ if(winner !== null) {
+  restartBoard()
+ }
+
+  const turnN1 = turn === players.n1 ? 'table-turn-black' : 'table-turn-inactive' 
+  const turnN2 = turn === players.n2 ? 'table-turn-white' : 'table-turn-inactive' 
+
+
+  function restartBoard() {
+    const newBoard = arrayBoard.map(row => [...row]);
     
-    if(kill.length !== 0) {
-      newBoard[kill[0]][kill[1]] = 'EB'
-    }
-    setTurn(currentPlayer === 'N1' ? 'N2' : 'N1')
-    
-    return setBoard(newBoard)
-    
+    setTurn(players.n1);
+    setCurrentPosition([0,0]);
+    setFuturePositions([[0,0],[0,0],[],[]]);
+    setValueFuture('');
+    setBoard(newBoard);
+    window.localStorage.clear('boar')
+    window.localStorage.clear('turn')
   }
   
   
 
+  function movePiece({ currentP, futureP, valueFuturePosition, currentPlayer, kill = [] }) {
+    const newBoard = board.map(row => [...row]);
+    
+    newBoard[futureP[0]][futureP[1]] = currentPlayer;
+    newBoard[currentP[0]][currentP[1]] = valueFuturePosition;
+  
+    if (kill.length !== 0) {
+      newBoard[kill[0]][kill[1]] = 'EB';
+
+      if(currentPlayer === players.n1){
+        const count = killsN2 + 1
+        setKillsN2(count)
+        if(count === 12) {
+          setWinner(currentPlayer)
+        }
+      }else {
+        const count = killsN1 + 1
+        setKillsN1(count)
+        if(count === 12) {
+          setWinner(currentPlayer)
+        }
+      }
+    } 
+  
+    setBoard(newBoard);
+    setTurn(currentPlayer === 'N1' ? 'N2' : 'N1');
+  
+    
+    setCurrentPosition([0,0]);       
+    setFuturePositions([[0,0],[0,0],[],[]]);
+    setValueFuture('');
+
+    window.localStorage.setItem('board', JSON.stringify(board))
+    window.localStorage.setItem('turn', JSON.stringify(turn))
+  }
+  
+  
+  
 
   const handleClick = (e) =>{
     const player = e.target.dataset.player
@@ -98,7 +159,7 @@ export function Board () {
     
   }
 
-    const wannaMove = (e) => {
+  const wannaMove = (e) => {
       if(e.target.dataset.value === 'EB'){
         setValueFuture(e.target.dataset.value)
       } 
@@ -136,7 +197,6 @@ export function Board () {
 
   return (
     <>
-
     <article className='Board'>
       {
         board.map((value, index)=>{
@@ -193,6 +253,18 @@ export function Board () {
         })
       }
     </article>
+
+    <div className='table-turns'>
+      <div className={turnN1}>
+        
+      </div>
+      <button className='table-turn-button' onClick={restartBoard} >
+        Restart
+      </button>
+      <div className={turnN2}>
+        
+      </div>
+    </div>
     
     </>
   )

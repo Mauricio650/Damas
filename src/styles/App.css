@@ -53,7 +53,7 @@
 }
 
 .token-white {
-    background-color: cornsilk;
+    background-color: cornflowerblue;
     color: transparent;
     box-shadow: rgba(2, 1, 2, 0.4) 0px 5px, rgba(10, 6, 9, 0.3) 0px 10px, rgba(36, 23, 31, 0.2) 0px 15px, rgba(201, 193, 193, 0.1) 0px 20px, rgba(16, 8, 13, 0.05) 0px 25px;
 }
@@ -71,4 +71,64 @@
         height: 1rem;     
     }
     
+}
+
+
+.table-turns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.table-turns .table-turn-black {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: brown;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.702);
+    animation: currentTurnAnimation 1s infinite ease-in;
+}
+
+
+.table-turns .table-turn-white {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: cornflowerblue;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.702);
+    animation: currentTurnAnimation 1s infinite ease-in;
+}
+
+
+.table-turn-button {
+    border: none;
+    background-color: rgba(128, 128, 128, 0.084);
+    border: solid 2px white;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.702);
+    cursor: pointer;
+}
+
+
+.table-turn-inactive {
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+
+@keyframes currentTurnAnimation {
+    from {
+        opacity: 0;
+        
+    }
+
+    100% {
+        opacity: 1;
+        
+    }
 }
