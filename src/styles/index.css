@@ -55,8 +55,17 @@ body {
 
 @media (max-width: 1280px) {
   .section-board-window {
-    width: 90vw;     /* 90% del ancho de la pantalla */
-    max-width: 300px; /* pero sin pasarse de 300px */
-    margin: 0 auto;   /* para centrar el tablero */
+    width: 90vw;     
+    max-width: 300px; 
+    margin: 0 auto;   
+  }
+}
+
+
+@media (max-width: 450px) {
+  .section-board-window {
+    width: 90vw;     
+    max-width: 300px;
+    margin: 0 auto;   
   }
 }
