@@ -2,6 +2,8 @@
 
 A modern implementation of the classic checkers game built with React and Vite, featuring a Windows-style interface.
 
+![alt text](image.png)
+
 ## ✨ Features
 
 - 🎲 8x8 game board
